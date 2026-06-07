@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>北航课程项目环境搭建 Agent</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">BUAA AI+X Course Project</p>
+        <h1>北航课程项目环境搭建 Agent</h1>
+        <p class="lead">
+          一个本地 MVP：输入 GitHub repo 或本地 git repo 路径，自动 clone、识别技术栈、安装依赖、启动项目，并通过 localhost HTTP 200 验证是否真正运行成功。
+        </p>
+        <div class="actions">
+          <a href="https://github.com/zhangxiao91/buaa-course-env-agent-mvp" class="button">查看项目仓库</a>
+          <a href="#evidence" class="button secondary">查看验证证据</a>
+        </div>
+      </div>
+      <aside class="status">
+        <span>Final real LLM run</span>
+        <strong>success</strong>
+        <code>run-1780068901553-02003e</code>
+      </aside>
+    </header>
+
+    <section class="grid">
+      <article>
+        <h2>解决的问题</h2>
+        <p>课程实验中常见问题不是代码不会写，而是依赖没装、解释器不对、启动命令不明确、服务是否成功无法确认。</p>
+      </article>
+      <article>
+        <h2>Agent Loop</h2>
+        <p>系统记录 observe → think → act → verify 的完整过程，每一步都进入日志和结构化结果。</p>
+      </article>
+      <article>
+        <h2>安全边界</h2>
+        <p>命令通过 allowlist 执行，只允许 git、node、npm、python、pip 等 MVP 必要命令。</p>
+      </article>
+      <article>
+        <h2>客观验证</h2>
+        <p>最终成功标准不是终端无报错，而是访问 localhost 并获得 HTTP 200。</p>
+      </article>
+    </section>
+
+    <section id="evidence" class="evidence">
+      <div>
+        <h2>验证结果</h2>
+        <table>
+          <tr><th>验证项</th><th>结果</th></tr>
+          <tr><td>clone repo</td><td>success</td></tr>
+          <tr><td>stack detect</td><td>Python / Flask</td></tr>
+          <tr><td>dependency install</td><td>success</td></tr>
+          <tr><td>app start</td><td>success</td></tr>
+          <tr><td>localhost verification</td><td>HTTP 200</td></tr>
+        </table>
+      </div>
+      <pre><code>[observe] start run
+[act] git clone ...
+[act] python -m pip install -r requirements.txt
+[act] python -m flask --app app run --host 127.0.0.1 --port 4644
+[verify] run success</code></pre>
+    </section>
+
+    <section class="screens">
+      <h2>运行截图</h2>
+      <figure>
+        <img src="./assets/launcher-home.png" alt="主启动器页面截图">
+        <figcaption>主启动器：输入课程项目 repo 并启动 Agent</figcaption>
+      </figure>
+      <figure>
+        <img src="./assets/real-llm-demo-success.png" alt="真实 LLM 运行成功截图">
+        <figcaption>真实 LLM run：课程 demo 页面显示 success 和 HTTP 200</figcaption>
+      </figure>
+    </section>
+
+    <section class="run">
+      <h2>本地运行</h2>
+      <pre><code>npm start
+node src/cli.js --api-key mock --base-url mock --model-name mock --repo-url test-fixtures/buaa-ai-course-demo</code></pre>
+      <p>真实 API key 通过本地 <code>.env</code> 配置，不进入展示页，也不提交到公开仓库。</p>
+    </section>
+  </main>
+</body>
+</html>
